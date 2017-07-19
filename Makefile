@@ -8,7 +8,7 @@ IDIR = src/includes
 BUILDDIR = build
 DEPS = $(wildcard $(IDIR)/*.hpp)
 
-LIBS=-lm
+LIBS=-pthread
 
 SOURCES = $(wildcard $(SOURCEDIR)/*.cpp)
 OBJECTS = $(patsubst $(SOURCEDIR)/%.cpp,$(BUILDDIR)/%.o,$(SOURCES))
@@ -16,8 +16,11 @@ OBJECTS = $(patsubst $(SOURCEDIR)/%.cpp,$(BUILDDIR)/%.o,$(SOURCES))
 $(BUILDDIR)/%.o: $(SOURCEDIR)/%.cpp $(DEPS)
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
-all: $(OBJECTS)
-	$(CXX) -o bin/$(EXECUTABLE) $^ $(CFLAGS)
+all: $(OBJECTS) 
+	$(CXX) $(LIBS) -o bin/$(EXECUTABLE) $^ $(CFLAGS)
+
+dirs:
+	mkdir build bin
 
 .PHONY: clean
 
