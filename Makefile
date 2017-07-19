@@ -1,49 +1,25 @@
 CXX=g++
-CXXFLAGS=-c -Wall
-LDFLAGS=
-
-SOURCEDIR = src/code
-BUILDDIR = build
+CXXFLAGS=-I.
 
 EXECUTABLE = MyProgram
 
-output: main.o 
-	$(CXX) main.o -o $(EXECUTABLE)
+SOURCEDIR = src/code
+IDIR = src/includes
+BUILDDIR = build
+DEPS = $(wildcard $(IDIR)/*.hpp)
 
-main.o: $(SOURCEDIR)/main.cpp
-	$(CXX) -c $(SOURCEDIR)/main.cpp -o $(BUILDDIR)/main.o
+LIBS=-lm
+
+SOURCES = $(wildcard $(SOURCEDIR)/*.cpp)
+OBJECTS = $(patsubst $(SOURCEDIR)/%.cpp,$(BUILDDIR)/%.o,$(SOURCES))
+
+$(BUILDDIR)/%.o: $(SOURCEDIR)/%.cpp $(DEPS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
+
+all: $(OBJECTS)
+	$(CXX) -o bin/$(EXECUTABLE) $^ $(CFLAGS)
 
 .PHONY: clean
+
 clean:
-	rm *.o $(EXECUTABLE)
-
-
-
-
-
-
-
-
-
-
-
-
-
-#SOURCES = $(wildcard $(SOURCEDIR)/*.cpp)
-#OBJECTS = $(SOURCES:.cpp=.o)
-
-
-#all: dir $(SOURCES) $(EXECUTABLE)
-    
-#$(EXECUTABLE): $(OBJECTS) 
-#	$(CXX) $(LDFLAGS) $(OBJECTS) -o $@
-
-#dir:
-#	mkdir -p $(BUILDDIR)
-
-#.cpp.o:
-#	$(CXX) $(CXXFLAGS) $< -o $@
-
-#.PHONY : clean
-#clean :
-#	-rm hello $(OBJECTS)
+	rm $(BUILDDIR)/*.o bin/$(EXECUTABLE)

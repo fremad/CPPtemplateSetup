@@ -1,0 +1,6 @@
+
+/*
+Example include
+*/
+
+void hello();
