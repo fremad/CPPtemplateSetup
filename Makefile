@@ -34,6 +34,9 @@ test: $(UNITTESTSOURCES) $(SOURCESWITHOUTMAIN) $(DEPS)
 dirs:
 	mkdir -p build bin
 
+doc: $(OBJECTS) $(DEPS)
+	doxygen doc/Doxyfile
+
 .PHONY: clean
 
 clean:
