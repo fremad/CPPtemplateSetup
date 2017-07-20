@@ -1,9 +1,9 @@
 #include "../../Include/Catch.hpp"
 
-unsigned int check( unsigned int number ) {
+unsigned int jump( unsigned int number ) {
     return 3;
 }
 
 TEST_CASE( "Check is computed", "[check]" ) {
-    REQUIRE( check(1) == 3 );
+    REQUIRE( jump(1) == 3 );
 }

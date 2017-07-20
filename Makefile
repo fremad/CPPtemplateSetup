@@ -20,7 +20,7 @@ SOURCESWITHOUTMAIN = $(filter-out $(SOURCEDIR)/main.cpp,$(SOURCES))
 
 UNITTESTSOURCES = $(wildcard $(TESTDIR)/UNIT/*.cpp)
 
-all: dirs build
+all: test dirs build 
 
 build: $(OBJECTS) 
 	$(CXX) $(LIBS) -o bin/$(EXECUTABLE) $^ $(CXXFLAGS)
@@ -29,7 +29,7 @@ $(BUILDDIR)/%.o: $(SOURCEDIR)/%.cpp $(DEPS)
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 test: $(UNITTESTSOURCES) $(SOURCESWITHOUTMAIN) $(DEPS)
-	$(CXX) $^ -o $(UNITTESTEXECUTEABLE)
+	$(CXX) $^ -o $(TESTDIR)/$(UNITTESTEXECUTEABLE)
 	
 dirs:
 	mkdir -p build bin
@@ -37,4 +37,4 @@ dirs:
 .PHONY: clean
 
 clean:
-	rm -f $(BUILDDIR)/*.o bin/$(EXECUTABLE) $(UNITTESTEXECUTEABLE)
+	rm -f $(BUILDDIR)/*.o bin/$(EXECUTABLE)
