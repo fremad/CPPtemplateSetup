@@ -3,4 +3,4 @@
 Example include
 */
 
-void hello();
+int hello();

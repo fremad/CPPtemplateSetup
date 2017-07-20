@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../includes/functions.hpp"
 #include <pthread.h>
-#include<boost/shared_ptr.hpp>
+#include <boost/shared_ptr.hpp>
 
 
 void* perform_work( void* argument )
@@ -13,17 +13,15 @@ void* perform_work( void* argument )
 }
 
 int main()
-{
+{ 
+  
     pthread_t thread;
-    //pthread.create()
     
     pthread_create( &thread, NULL, perform_work, NULL );
 
     boost::shared_ptr<int> ptrToInt (new int(8));
 
-    
-
     std::cout << "Hello "  <<  *ptrToInt << " world!\n" ;
     std::cout << "I changed\n";
-    hello();
+    std::cout << hello() << "\n";
 }

@@ -13,6 +13,7 @@
                 "path": [
                     "/usr/include",
                     "/usr/local/include",
+                    "usr/lib/i386-linux-gnu/",
                     "${workspaceRoot}"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
