@@ -12,9 +12,10 @@ void* perform_work( void* argument )
   return NULL;
 }
 
+/// Brief description.
+/** Detailed description. */
 int main()
-{ 
-  
+{  
     pthread_t thread;
     
     pthread_create( &thread, NULL, perform_work, NULL );
@@ -23,5 +24,5 @@ int main()
 
     std::cout << "Hello "  <<  *ptrToInt << " world!\n" ;
     std::cout << "I changed\n";
-    std::cout << hello() << "\n";
+    hello();
 }
