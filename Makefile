@@ -20,7 +20,7 @@ SOURCESWITHOUTMAIN = $(filter-out $(SOURCEDIR)/main.cpp,$(SOURCES))
 
 UNITTESTSOURCES = $(wildcard $(TESTDIR)/UNIT/*.cpp)
 
-all: test dirs build 
+all: test dirs build doc
 
 build: $(OBJECTS) 
 	$(CXX) $(LIBS) -o bin/$(EXECUTABLE) $^ $(CXXFLAGS)
@@ -32,7 +32,7 @@ test: $(UNITTESTSOURCES) $(SOURCESWITHOUTMAIN) $(DEPS)
 	$(CXX) $^ -o $(TESTDIR)/$(UNITTESTEXECUTEABLE)
 	
 dirs:
-	mkdir -p build bin
+	mkdir -p $(BUILDDIR) bin
 
 doc: $(OBJECTS) $(DEPS)
 	doxygen doc/Doxyfile
